@@ -1,0 +1,35 @@
+<!-- views/tareas.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasks</title>
+  </head>
+  <body>
+    <h1>Tasks</h1>
+    <form action="/tareas" method="POST">
+      <label for="descripcion">Task Description:</label>
+      <input type="text" id="descripcion" name="descripcion" required />
+      <button type="submit">Add Task</button>
+    </form>
+    <h2>Task List</h2>
+    <ul>
+      <% tareas.forEach(function(tarea) { %>
+      <li>
+        <%= tarea.descripcion %>
+        <form
+          action="/tareas/<%= tarea.id %>?_method=DELETE"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+      <% }); %>
+    </ul>
+    <form action="/logout" method="POST">
+      <button type="submit">Logout</button>
+    </form>
+  </body>
+</html>
